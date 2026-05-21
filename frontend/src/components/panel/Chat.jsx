@@ -9,7 +9,7 @@ const GLOBAL_CHANNEL_ID = "GLOBAL_BROADCAST";
 
 const Chat = () => {
     const dispatch = useDispatch()
-    const users = useSelector(state => state.user.users)
+    const {users, isLoading, error} = useSelector(state => state.user)
     const currentUser = useSelector(state => state.user.currentUser)
     const messages = useSelector(state => state.message.messages)
     console.log(messages)
