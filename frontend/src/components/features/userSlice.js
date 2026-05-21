@@ -80,7 +80,7 @@ const initialState = {
     ],
     currentUser: JSON.parse(localStorage.getItem('user')) || null,
     isAuthenticated: !!localStorage.getItem('accessToken'),
-    loginError: null,
+    error: null,
     isLoading: false
 }
 
@@ -105,7 +105,7 @@ export const userSlice = createSlice({
                     state.isLoading = false;
                     state.currentUser = user;
                     state.isAuthenticated = true;
-                    state.loginError = null;
+                    state.error = null;
 
 
                     localStorage.setItem('accessToken', response?.accessToken)
@@ -115,7 +115,7 @@ export const userSlice = createSlice({
                 })
                 .addCase(loginUser.rejected, (state, action) => {
                     state.isLoading = false;
-                    state.loginError = action.payload;
+                    state.error = action.payload;
                 })
                 .addCase(logoutUser.pending, (state) => {
                     state.isLoading = true;
@@ -124,7 +124,7 @@ export const userSlice = createSlice({
                     state.isLoading = false;
                     state.currentUser = null;
                     state.isAuthenticated = false;
-                    state.loginError = null;
+                    state.error = null;
                     state.users = [];
 
                     localStorage.removeItem('accessToken')
@@ -132,7 +132,7 @@ export const userSlice = createSlice({
                 })
                 .addCase(logoutUser.rejected, (state, action) => {
                     state.isLoading = false;
-                    state.loginError = action.payload;
+                    state.error = action.payload;
                 })
                 .addCase(fetchAllUsers.pending, (state) => {
                     state.isLoading = true;
@@ -140,11 +140,11 @@ export const userSlice = createSlice({
                 .addCase(fetchAllUsers.fulfilled, (state, action) => {
                     state.users = action.payload;
                     state.isLoading = false;
-                    state.loginError = null;
+                    state.error = null;
                 })
                 .addCase(fetchAllUsers.rejected, (state, action) => {
                     state.isLoading = false;
-                    state.loginError = action.payload;
+                    state.error = action.payload;
                 })
                 .addCase(fetchUsersChats.pending, (state) => {
                     state.isLoading = true;
@@ -152,18 +152,18 @@ export const userSlice = createSlice({
                 .addCase(fetchUsersChats.fulfilled, (state, action) => {
                     state.users = action.payload;
                     state.isLoading = false;
-                    state.loginError = null;
+                    state.error = null;
                 })
                 .addCase(fetchUsersChats.rejected, (state, action) => {
                     state.isLoading = false;
-                    state.loginError = action.payload;
+                    state.error = action.payload;
                 })
                 .addCase(registerUser.pending, (state) => {
                     state.isLoading = true;
                 })
                 .addCase(registerUser.fulfilled, (state, action) => {
                     state.isLoading = false;
-                    state.loginError = null;
+                    state.error = null;
                     state.isAuthenticated = false;
                     state.users = [];
                     state.currentUser = null;
@@ -172,7 +172,7 @@ export const userSlice = createSlice({
                 })
                 .addCase(registerUser.rejected, (state, action) => {
                     state.isLoading = false;
-                    state.loginError = action.payload;
+                    state.error = action.payload;
                 })
         }
 })

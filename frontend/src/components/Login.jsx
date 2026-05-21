@@ -13,7 +13,7 @@ const Login = () => {
     const isAuthenticated = useSelector(state => state.user.isAuthenticated)
     const currentUser = useSelector(state => state.user.currentUser)
 
-    const loginError = useSelector(state => state.user.loginError)
+    const error = useSelector(state => state.user.error)
     const navigate = useNavigate()
 
     const handleSubmit = (e) => {
@@ -70,7 +70,7 @@ const Login = () => {
                     />
                 </div>
 
-                {loginError && <span className="error-message">⚠ {loginError}</span>}
+                {error && <span className="error-message">⚠ {error}</span>}
 
                 <button type="submit" className="submit-btn">
                     Get Started

@@ -5,7 +5,7 @@ import { fetchAllUsers } from '../features/userSlice';
 const UserList = () => {
   const users = useSelector(state => state.user.users)
   const isAuthenticated = useSelector(state => state.user.isAuthenticated)
-  const {isLoading, loginError} = useSelector(state => state.user)
+  const {isLoading, error} = useSelector(state => state.user)
   const dispatch = useDispatch()
 
 
@@ -18,7 +18,7 @@ console.log('user list')
   }, [])
 
   if (isLoading) return <div className="home-title">Loading Data....</div>;
-  if (loginError) return <div className="home-title" style={{ color: "#ff6b6b" }}>Error: {error}</div>;
+  if (error) return <div className="home-title" style={{ color: "#ff6b6b" }}>Error: {error}</div>;
   return (
     <div className="form-wrapper">
       <div className="auth-form" style={{ maxWidth: '800px' }}> {/* Wider for data */}
