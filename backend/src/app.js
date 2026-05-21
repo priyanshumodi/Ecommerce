@@ -14,7 +14,7 @@ const app = express();
 const corsOptions = {
     // 1. Specify the exact origin of your React app
     // origin: 'http://localhost:5173', 
-    origin: 'https://ecommerce-eight-pi.vercel.app/', 
+    origin: process.env.CORS_ORIGIN, 
     
     // 2. Allow cookies to be passed
     credentials: true,
