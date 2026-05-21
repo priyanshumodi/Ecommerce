@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+import api from './services/apiConfig';
 
 const OrderSummary = ({ product, quantity, address, onBack, onClose, currentUser }) => {
     const [isProcessing, setIsProcessing] = useState(false);
@@ -15,7 +15,7 @@ const OrderSummary = ({ product, quantity, address, onBack, onClose, currentUser
             console.log("⚡ Initiating checkout tracking with server. Amount:", finalAmount);
             
             // 1. Fire secure payload sequence directly to your local Node server port 8000
-            const response = await axios.post("http://localhost:8000/api/payment/order", {
+            const response = await api.post("/payment/order", {
                 amount: finalAmount
             });
             const orderData = response.data;

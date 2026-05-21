@@ -1,6 +1,6 @@
 import { io } from "socket.io-client";
 
-const URL = "http://localhost:8000"; 
+const URL = "https://ecommerce-2hvv.onrender.com"; 
 
 // autoConnect: false stops it from firing before user is authenticated
 export const socket = io(URL, {
