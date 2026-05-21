@@ -11,6 +11,13 @@ export const setupSocket = (io) => {
             console.log(`User joined private room: ${roomId}`);
         });
 
+        socket.on('typing', (data) => {
+            socket.to(data.room).emit('userTyping', { user: data.user });
+        });
+
+        socket.on('stopTyping', (data) => {
+            socket.to(data.room).emit('userStoppedTyping');
+        });
 
 
         socket.on("send_admin_broadcast", async (data) => {

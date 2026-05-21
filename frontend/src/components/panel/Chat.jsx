@@ -22,7 +22,9 @@ const Chat = () => {
     })
     const [activeContactId, setActiveContactId] = useState(GLOBAL_CHANNEL_ID);
     const [inputText, setInputText] = useState("");
+    const [typing, setTyping] = useState(false);
     const messageEndRef = useRef(null);
+    const typingTimeoutRef = useRef(null);
 
     useEffect(() => {
         // 1. Fetch the initial list of chat contacts
@@ -70,7 +72,21 @@ const Chat = () => {
             receiverId: activeContactId
         });
 
+        socket.on('userTyping', (data) => {
+            setTyping(true);
+        });
+
+        socket.on('userStoppedTyping', () => {
+            setTyping(false);
+        });
+
         console.log(`Switched active socket pipeline room to: ${activeContactId}`);
+
+        // Clean up event listeners when component unmounts
+        return () => {
+            socket.off('userTyping');
+            socket.off('userStoppedTyping');
+        };
     }, [activeContactId, currentUser]); // 👈 Listens carefully to contact changes
 
     // Fetch initial channel logs on start
@@ -83,6 +99,14 @@ const Chat = () => {
     useEffect(() => {
         messageEndRef.current?.scrollIntoView({ behavior: "smooth" });
     }, [messages]);
+
+    // useEffect(() => {
+    //     const timer = setTimeout(() => {
+    //         messageEndRef.current?.scrollIntoView({ behavior: "smooth", block: "end" });
+    //     }, 50);
+
+    //     return () => clearTimeout(timer);
+    // }, [messages, typing]);
 
     // Handle changing channels/contacts
     const handleSwitchContact = (user) => {
@@ -100,6 +124,24 @@ const Chat = () => {
             });
         }
     };
+
+    const handleInputChange = (e) => {
+        // console.log(e.target.value)
+        setInputText(e.target.value)
+        // Notify server that this user is typing
+        const currentRoomId = [currentUser?._id, activeContactId].sort().join("_");
+        socket.emit('typing', { room: currentRoomId, user: currentUser });
+
+        // Clear the previous timeout tracker
+        if (typingTimeoutRef.current) {
+            clearTimeout(typingTimeoutRef.current);
+        }
+
+        // Set a new timeout to stop typing after 2 seconds of silence
+        typingTimeoutRef.current = setTimeout(() => {
+            socket.emit('stopTyping', { room: currentRoomId });
+        }, 2000);
+    }
 
     // Send Message Routing Logic
     const handleSendMessage = () => {
@@ -211,16 +253,16 @@ const Chat = () => {
                         </div>
                     ))}
                     {/* typing logic */}
-                    {/* {showTyping && (
+                    {typing && (
                         <div className="msg-row in">
                             <div className={`msg-avatar ${activeContact.cls}`}>{activeContact.initials}</div>
                             <div className="bubble in" style={{ padding: '12px 16px' }}>
                                 <div className="typing-dots"><span></span><span></span><span></span></div>
                             </div>
                         </div>
-                    )} */}
+                    )}
                     {/* Dummy div for auto-scroll */}
-                    <div ref={messageEndRef} />
+                    {/* <div ref={messageEndRef} /> */}
                 </div>
 
 
@@ -237,7 +279,7 @@ const Chat = () => {
                                 rows="1"
                                 placeholder="Type a message..."
                                 value={inputText}
-                                onChange={(e) => setInputText(e.target.value)}
+                                onChange={(e) => handleInputChange(e)}
                                 onKeyDown={(e) => {
                                     if (e.key === 'Enter' && !e.shiftKey) {
                                         e.preventDefault();
