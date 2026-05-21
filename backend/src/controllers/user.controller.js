@@ -62,7 +62,9 @@ const loginUser = async (req, res) => {
 
         const options = {
             httpOnly: true,
-            secure: true
+            secure: true,      // CRITICAL: Must be true in production (requires HTTPS)
+            sameSite: "none",  // CRITICAL: Allows cross-site cookie sharing
+            maxAge: 7 * 24 * 60 * 60 * 1000 // 7 days
         }
 
         return res
