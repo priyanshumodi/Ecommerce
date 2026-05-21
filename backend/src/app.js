@@ -13,7 +13,8 @@ const app = express();
 
 const corsOptions = {
     // 1. Specify the exact origin of your React app
-    origin: 'http://localhost:5173', 
+    // origin: 'http://localhost:5173', 
+    origin: 'https://ecommerce-2hvv.onrender.com', 
     
     // 2. Allow cookies to be passed
     credentials: true,
