@@ -40,6 +40,7 @@ const SignUp = () => {
             age: null,
             gender: ""
         })
+        navigate('/login')
     }
 
     const handleChange = (e) => {
