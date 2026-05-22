@@ -47,7 +47,7 @@ const addAddress = async (req, res) => {
     }
 };
 
-export const getAllAddress = async (req, res) => {
+const getAllAddress = async (req, res) => {
     try {
 
         const customerId = req.user?._id;
