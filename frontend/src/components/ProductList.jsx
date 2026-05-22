@@ -2,11 +2,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchAllProducts } from './features/productSlice';
 import { useEffect } from 'react';
 import ProductCard from './ProductCard';
+import { useNavigate } from 'react-router-dom';
 
 const ProductList = () => {
     const dispatch = useDispatch()
     const { products, isLoading, error } = useSelector(state => state.product)
     const currentUser = useSelector(state => state.user.currentUser)
+    const navigate = useNavigate()
 
     useEffect(() => {
         dispatch(fetchAllProducts())
@@ -16,7 +18,7 @@ const ProductList = () => {
     return (
         <div>
             {currentUser?.role === 'admin' ? (
-                <button className="add-product-btn" onClick={() => navigate('/admin/add-product')}>
+                <button className="add-product-btn" onClick={() => navigate('/add-product')}>
                     <span className="plus-icon">+</span> Add
                 </button>
             ) : (<></>)

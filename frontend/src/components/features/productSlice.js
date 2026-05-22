@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { getAllProductApi, deleteProductApi } from "../services/apiService";
+import { getAllProductApi, deleteProductApi, addProductApi } from "../services/apiService";
 import { toast } from "react-toastify";
 
 
@@ -15,11 +15,24 @@ export const fetchAllProducts = createAsyncThunk(
     }
 )
 
-export const  deleteProduct = createAsyncThunk(
+export const deleteProduct = createAsyncThunk(
     'product/deleteProduct',
     async (productId, { rejectWithValue }) => {
         try {
             const product = await deleteProductApi(productId);
+            console.log(product)
+            // return product;
+        } catch (error) {
+            return rejectWithValue(error.message);
+        }
+    }
+)
+
+export const addProduct = createAsyncThunk(
+    'product/addProduct',
+    async (data, { rejectWithValue }) => {
+        try {
+            const product = await addProductApi(data);
             console.log(product)
             // return product;
         } catch (error) {

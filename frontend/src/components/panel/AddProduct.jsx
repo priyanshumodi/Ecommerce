@@ -11,7 +11,7 @@ const AddProduct = () => {
     })
     const handleSubmit = (e) => {
         e.preventDefault()
-
+        
     }
 
     const handleChange = (e) => {
@@ -25,7 +25,7 @@ const AddProduct = () => {
     return (
         <div className="form-wrapper">
             <form onSubmit={handleSubmit} className="auth-form">
-                <h2>Login</h2>
+                <h2>Add Product</h2>
 
                 <div className="input-group">
                     <label>Email Address</label>

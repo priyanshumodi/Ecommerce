@@ -77,6 +77,16 @@ export const deleteProductApi = async (productId) => {
     }
 }
 
+export const addProductApi = async (data) => {
+    try {
+        const response = await api.delete(`/products/add`, data)
+        console.log(response)
+        // return response.data.products;
+    } catch (error) {
+        throw error.message;
+    }
+}
+
 
 // Order Services
 
