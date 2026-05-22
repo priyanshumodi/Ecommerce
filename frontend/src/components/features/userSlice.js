@@ -5,6 +5,9 @@ import { getAllUsersApi } from "../services/apiService";
 import { getUsersChatsApi } from "../services/apiService"
 import { registerUserApi } from "../services/apiService";
 import { toast } from "react-toastify";
+import Cookies from 'js-cookie';
+
+const accessToken = Cookies.get('accessToken');
 
 export const loginUser = createAsyncThunk(
     'user/loginUser',
@@ -78,8 +81,8 @@ const initialState = {
             email: "priyanshumodi944@gmail.com"
         },
     ],
-    currentUser: JSON.parse(localStorage.getItem('user')) || null,
-    isAuthenticated: !!localStorage.getItem('accessToken'),
+    currentUser: accessToken ? (JSON.parse(localStorage.getItem('user')) || null) : null,
+    isAuthenticated: accessToken ? (!!localStorage.getItem('accessToken')) : false,
     error: null,
     isLoading: false
 }
