@@ -5,14 +5,6 @@ import { getAllUsersApi } from "../services/apiService";
 import { getUsersChatsApi } from "../services/apiService"
 import { registerUserApi } from "../services/apiService";
 import { toast } from "react-toastify";
-import Cookies from 'js-cookie';
-
-const accessToken = Cookies.get('accessToken');
-
-if (!accessToken) {
-    localStorage.removeItem('accessToken')
-    localStorage.removeItem('user')
-}
 
 export const loginUser = createAsyncThunk(
     'user/loginUser',
