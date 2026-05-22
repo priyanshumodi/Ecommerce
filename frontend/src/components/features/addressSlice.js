@@ -25,15 +25,15 @@ export const addressSlice = createSlice({
     initialState,
     extraReducers: (builder) => {
         builder
-            .addCase(fetchUsersMessages.pending, (state) => {
+            .addCase(addAddress.pending, (state) => {
                 state.isLoading = true;
             })
-            .addCase(fetchUsersMessages.fulfilled, (state, action) => {
+            .addCase(addAddress.fulfilled, (state, action) => {
                 state.isLoading = false;
                 state.address = action.payload
                 state.error = null;
             })
-            .addCase(fetchUsersMessages.rejected, (state, action) => {
+            .addCase(addAddress.rejected, (state, action) => {
                 state.isLoading = false;
                 state.error = action.payload;
             })
