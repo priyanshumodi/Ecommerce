@@ -15,18 +15,7 @@ export const fetchUsersMessages = createAsyncThunk(
 )
 
 const initialState = {
-    messages: [
-        {
-            _id: 1,
-            receiver: {
-                _id: 2,
-                firstName: "priyanshu",
-                lastName: "modi",
-                email: "priyashu@gmail.com",
-            },
-            text: ""
-        }
-    ],
+    messages: [],
     isLoading: false,
     error: null,
 }

@@ -165,8 +165,8 @@ const Chat = () => {
         setInputText("");
     };
 
-    if (isLoading) return <div className="home-title">Loading Data....</div>;
-    if (error) return <div className="home-title" style={{ color: "#ff6b6b" }}>Error: {error}</div>;
+    // if (isLoading) return <div className="home-title">Loading Data....</div>;
+    // if (error) return <div className="home-title" style={{ color: "#ff6b6b" }}>Error: {error}</div>;
 
     return (
         <div className="chat-root">
