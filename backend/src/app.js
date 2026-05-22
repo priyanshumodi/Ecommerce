@@ -5,6 +5,7 @@ import productRouter from './routes/product.routes.js'
 import orderRouter from './routes/order.routes.js'
 import messageRouter from './routes/message.routes.js'
 import paymentRouter from './routes/payment.routes.js'
+import addressRouter from './routes/address.routes.js'
 import cookieParser from 'cookie-parser';
 import { verifyJWT } from './middlewares/auth.middleware.js';
 
@@ -38,5 +39,6 @@ app.use('/api/products', productRouter)
 app.use('/api/orders', verifyJWT, orderRouter)
 app.use('/api/messages', verifyJWT, messageRouter)
 app.use('/api/payment', verifyJWT, paymentRouter)
+app.use('/api/address', verifyJWT, addressRouter)
 
 export { app }

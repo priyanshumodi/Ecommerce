@@ -141,3 +141,15 @@ export const getUsersMessageApi = async (_id) => {
         throw error.message;
     }
 }
+
+
+// address
+export const addAddressApi = async(data) => {
+    try {
+        const response = await api.post(`/address/add`, data)
+        console.log(response)
+        // return response.data.data;
+    } catch (error) {
+        throw error.message;
+    }
+}

@@ -3,12 +3,14 @@ import productReducer from '../features/productSlice'
 import userReducer from '../features/userSlice'
 import orderReducer from '../features/orderSlice'
 import  messageReducer  from "../features/messageSlice";
+import addressReducer from '../features/addressSlice';
 
 export const store = configureStore({
     reducer: {
         user: userReducer,
         product: productReducer,
         order: orderReducer,
-        message: messageReducer
+        message: messageReducer,
+        address: addressReducer
     }
 })
