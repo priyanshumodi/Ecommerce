@@ -23,10 +23,21 @@ const getAllOrders = async (req, res) => {
                 }
             },
             {
+                $lookup: {
+                    from: "addresses",
+                    localField: "addressId",
+                    foreignField: "_id",
+                    as: "addressDetails"
+                }
+            },
+            {
                 $unwind: "$customerDetails"
             },
             {
                 $unwind: "$productDetails"
+            },
+            {
+                $unwind: "$addressDetails"
             },
             {
                 $project: {
@@ -44,6 +55,13 @@ const getAllOrders = async (req, res) => {
                         quantity: "$productDetails.quantity",
                         category: "$productDetails.category",
                         image: "$productDetails.image",
+                    },
+                    addressDetail: {
+                        address: "$addressDetails.address",
+                        city: "$addressDetails.city",
+                        pincode: "$addressDetails.pincode",
+                        state: "$addressDetails.state",
+                        country: "$addressDetails.country",
                     },
                     quantity: 1,
                     totalPrice: 1,
@@ -111,15 +129,39 @@ const myOders = async (req, res) => {
                 }
             },
             {
+                $lookup: {
+                    from: "addresses",
+                    localField: "addressId",
+                    foreignField: "_id",
+                    as: "addressDetail",
+                    pipeline: [
+                        {
+                            $project: {
+                                _id: 1,
+                                address: 1,
+                                city: 1,
+                                pincode: 1,
+                                state: 1,
+                                country: 1,
+                            }
+                        }
+                    ]
+                }
+            },
+            {
                 $unwind: "$customerDetail"
             },
             {
                 $unwind: "$productDetail"
             },
             {
+                $unwind: "$addressDetail"
+            },
+            {
                 $project: {
                     "customerDetail": 1,
                     "productDetail": 1,
+                    "addressDetail": 1,
                     status: 1,
                     quantity: 1,
                     totalPrice: 1
@@ -142,13 +184,14 @@ const addOrder = async (req, res) => {
     try {
         const userId = req.user?._id;
         const { productId } = req.params;
-        const {quantity} = req.body;
+        const {quantity, addressId} = req.body;
 
         const order = await Order.create({
             customerId: userId,
             productId: productId,
             quantity: quantity,
-            totalPrice: 0
+            totalPrice: 0,
+            addressId
         })
 
         return res.status(200).json(new ApiResponse(200, order, "order added successfully"))

@@ -26,7 +26,7 @@ const orderSchema = new Schema(
             enum: ['PENDING', 'CONFIRMED' ,'PROCESSING', 'SHIPPED', 'DELIVERED', 'CANCELLED'],
             default: 'CONFIRMED'
         },
-        address: {
+        addressId: {
             type: mongoose.Schema.Types.ObjectId,
             ref: "Address",
             required: true
