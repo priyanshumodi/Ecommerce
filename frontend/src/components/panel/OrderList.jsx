@@ -114,7 +114,7 @@ const OrderList = () => {
 
               {/* COLUMN 1: ORDER ID & CUSTOMER */}
               <div className="order-main-info">
-                <p className="user-name">Order #{order?._id}</p>
+                <p className="meta-label">Order #{order?._id}</p>
                 <p className="user-detail-name">{order?.customerDetail?.firstName || 'Guest'}</p>
               </div>
 
