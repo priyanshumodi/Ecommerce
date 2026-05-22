@@ -25,6 +25,11 @@ const orderSchema = new Schema(
             required: true,
             enum: ['PENDING', 'CONFIRMED' ,'PROCESSING', 'SHIPPED', 'DELIVERED', 'CANCELLED'],
             default: 'CONFIRMED'
+        },
+        address: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Address",
+            required: true
         }
     },{
         timestamps: true
