@@ -15,8 +15,6 @@ import ProtectedRoute from './auth/ProtectedRoute'
 import AddProduct from "./components/panel/AddProduct"
 import Chat from "./components/panel/Chat"
 import BuyPopup from './components/BuyPopup'
-import Checkout from "./components/CheckOut"
-import CheckoutScreen from "./components/CheckoutScreen"
 import CheckOut from "./components/CheckOut"
 import CheckoutAddress from "./components/CheckoutAddress"
 
