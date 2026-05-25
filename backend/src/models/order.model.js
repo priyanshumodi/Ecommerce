@@ -28,7 +28,8 @@ const orderSchema = new Schema(
         },
         addressId: {
             type: mongoose.Schema.Types.ObjectId,
-            ref: "Address"
+            ref: "Address",
+            required: false
         }
     },{
         timestamps: true
