@@ -164,7 +164,8 @@ const myOders = async (req, res) => {
                     "addressDetail": 1,
                     status: 1,
                     quantity: 1,
-                    totalPrice: 1
+                    totalPrice: 1,
+                    createdAt: 1
                 }
             }
         ])
