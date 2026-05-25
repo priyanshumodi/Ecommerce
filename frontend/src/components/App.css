@@ -1845,3 +1845,328 @@ button {
     background-color: #fff3e0;
     color: #ef6c00;
 }
+
+/* ============================================================
+   CHECKOUT ADDRESS VIEWS (INTEGRATED THEME EXTENSION)
+   ============================================================ */
+
+.checkout-theme-wrapper {
+    max-width: 1200px;
+    margin: 90px auto 40px auto; /* Combines spacing parameters from your .form-wrapper block */
+    padding: 0 40px;
+    color: #ffffff;
+}
+
+.checkout-theme-title {
+    color: #ffffff;
+    font-size: 28px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    text-align: left;
+}
+
+.checkout-theme-subtitle {
+    color: #d1d5d8;
+    font-size: 14px;
+    margin-bottom: 40px;
+}
+
+.checkout-theme-grid {
+    display: grid;
+    grid-template-columns: 1.7fr 1.3fr;
+    gap: 30px;
+    align-items: start;
+}
+
+.checkout-theme-loading {
+    color: #9B87F5;
+    text-align: center;
+    padding: 100px 0;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+/* Headings and Section Badges */
+.checkout-panel-heading {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: #ffffff;
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+.checkout-count-badge {
+    background: rgba(155, 135, 245, 0.2);
+    color: #9B87F5;
+    font-size: 12px;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-weight: bold;
+}
+
+/* Interactive Card Stack & Rows */
+.checkout-cards-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.checkout-address-row {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 20px;
+    border-radius: 16px;
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    cursor: pointer;
+    position: relative;
+    transition: transform 0.2s ease, border 0.3s ease, box-shadow 0.3s ease;
+}
+
+.checkout-address-row:hover {
+    border: 1px solid #9B87F5;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3), 0 0 12px rgba(155, 135, 245, 0.1);
+    transform: translateY(-2px);
+}
+
+/* Simulated Custom Purple Neon Selection Radio Circles */
+.checkout-custom-radio {
+    margin-top: 4px;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    border: 1px solid rgba(155, 135, 245, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.2);
+    transition: border-color 0.3s ease;
+    flex-shrink: 0;
+}
+
+.checkout-radio-core {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: transparent;
+    transition: background-color 0.3s ease;
+}
+
+.checkout-address-row:hover .checkout-custom-radio {
+    border-color: #9B87F5;
+}
+
+.checkout-address-row:hover .checkout-radio-core {
+    background-color: #9B87F5;
+}
+
+/* Inner Text Typos */
+.checkout-text-main {
+    color: #ffffff;
+    font-weight: 600;
+    font-size: 16px;
+    margin: 0 0 6px 0;
+    line-height: 1.4;
+}
+
+.checkout-text-sub {
+    color: #d1d5d8;
+    font-size: 13px;
+    margin: 0 0 4px 0;
+}
+
+.checkout-pin-highlight {
+    color: #9B87F5;
+    font-weight: 600;
+}
+
+.checkout-text-meta {
+    font-size: 11px;
+    text-transform: uppercase;
+    font-weight: bold;
+    color: rgba(155, 135, 245, 0.8);
+    margin: 0;
+    letter-spacing: 0.5px;
+}
+
+.checkout-action-hint {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    color: #9B87F5;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+.checkout-address-row:hover .checkout-action-hint {
+    opacity: 1;
+}
+
+.checkout-empty-state {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px dashed rgba(155, 135, 245, 0.3);
+    border-radius: 16px;
+    padding: 40px;
+    text-align: center;
+    color: #d1d5d8;
+}
+
+/* Address Inlining Form Blocks */
+.checkout-form-container {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 30px;
+    border-radius: 16px;
+}
+
+.checkout-form-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    padding-bottom: 12px;
+}
+
+.checkout-form-header h3 {
+    margin: 0;
+    font-size: 16px;
+    color: #ffffff;
+    font-weight: 600;
+}
+
+.checkout-inline-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.checkout-form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+/* Custom Standardised Input Groups */
+.checkout-input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.checkout-input-group label {
+    font-size: 13px;
+    color: #d1d5d8;
+}
+
+.checkout-input-group input,
+.checkout-input-group textarea {
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(155, 135, 245, 0.3);
+    padding: 12px;
+    border-radius: 8px;
+    color: white;
+    outline: none;
+    transition: border 0.3s ease;
+    appearance: none;
+    font-family: inherit;
+}
+
+.checkout-input-group textarea {
+    resize: none;
+}
+
+.checkout-input-group input:focus,
+.checkout-input-group textarea:focus {
+    border: 1px solid #9B87F5;
+}
+
+.checkout-input-disabled {
+    background: rgba(0, 0, 0, 0.4) !important;
+    border: 1px solid rgba(255, 255, 255, 0.05) !important;
+    color: #666666 !important;
+    cursor: not-allowed;
+}
+
+/* Structural Buttons & Control Hooks */
+.checkout-submit-btn {
+    background-color: #9B87F5;
+    color: white;
+    padding: 14px;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s ease, background 0.3s ease;
+}
+
+.checkout-submit-btn:hover {
+    background-color: #8a76e0;
+    transform: translateY(-1px);
+}
+
+.checkout-btn-cancel {
+    background: none;
+    border: none;
+    color: #ff6b6b;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.checkout-btn-dashed {
+    width: 100%;
+    padding: 20px;
+    border: 1px dashed rgba(155, 135, 245, 0.4);
+    background: rgba(155, 135, 245, 0.02);
+    color: #9B87F5;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.checkout-btn-dashed:hover {
+    border-color: #9B87F5;
+    background: rgba(155, 135, 245, 0.08);
+    transform: translateY(-1px);
+}
+
+.w-100 {
+    width: 100%;
+}
+
+/* ============================================================
+   RESPONSIVE LAYOUT CONFIGURATIONS
+   ============================================================ */
+
+@media (max-width: 768px) {
+    .checkout-theme-wrapper {
+        padding: 0 20px;
+        margin-top: 40px;
+    }
+
+    .checkout-theme-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+
+    .checkout-address-row {
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .checkout-action-hint {
+        position: static;
+        margin-top: 10px;
+        display: block;
+        opacity: 1;
+    }
+}

@@ -18,6 +18,7 @@ import BuyPopup from './components/BuyPopup'
 import Checkout from "./components/CheckOut"
 import CheckoutScreen from "./components/CheckoutScreen"
 import CheckOut from "./components/CheckOut"
+import CheckoutAddress from "./components/CheckoutAddress"
 
 
 const App = () => {
@@ -74,7 +75,8 @@ const App = () => {
                 { path: '', element: <ProductList /> },
                 { path: 'orders', element: <OrderList /> },
                 { path: 'chat-room', element: <Chat />},
-                { path: 'buy', element: <BuyPopup />}
+                { path: 'buy', element: <BuyPopup />},
+                { path: 'checkout-address', element: <CheckoutAddress />}
               ]
             }
           ]
