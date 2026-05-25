@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import api from '../../../src/components/features/userSlice'; // Adjust this import path if necessary
-import './CheckoutAddress.css'; 
+import api from './services/apiConfig'
+import './App.css'; 
 
 const CheckoutAddress = () => {
     const navigate = useNavigate();
