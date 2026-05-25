@@ -112,7 +112,7 @@ export const getMyOrdersApi = async () => {
 
 export const addOrderApi = async (formData) => {
     try {
-        const response = await api.post(`/orders/${formData.productId}`, {quantity: formData.quantity})
+        const response = await api.post(`/orders/${formData.productId}`, {quantity: formData.quantity, addressId: formData.addressId})
         // console.log(response)
         return response.data;
     } catch (error) {

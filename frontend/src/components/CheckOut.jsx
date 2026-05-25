@@ -73,7 +73,7 @@ const CheckOut = () => {
             // console.log(verifyResponse)
 
             if (verifyResponse.data.success) {
-              dispatch(addOrder({ productId: product?._id, quantity: orderSummary?.quantity }));
+              dispatch(addOrder({ productId: product?._id, addressId: "6a101d51e7d54ab69bac4564", quantity: orderSummary?.quantity }));
               navigate('/profile/orders')
               
             }
