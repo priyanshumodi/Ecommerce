@@ -1,5 +1,6 @@
 import { Product } from "../models/product.model.js"
 import { ApiResponse } from "../utilities/ApiResponse.js"
+import redisClient from "../config/redis.js";
 
 const allProducts = async (req, res) => {
     try {
