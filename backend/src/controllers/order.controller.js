@@ -186,6 +186,8 @@ const addOrder = async (req, res) => {
         const { productId } = req.params;
         const {quantity, addressId} = req.body;
 
+        console.log("addressID: ", addressId);
+
         const order = await Order.create({
             customerId: userId,
             productId: productId,
