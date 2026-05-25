@@ -3,9 +3,22 @@ import { ApiResponse } from "../utilities/ApiResponse.js"
 
 const allProducts = async (req, res) => {
     try {
-        const products = await Product.find()
+        const cacheKey = 'products:all';
 
-        return res.status(200).json({ products, message: "All products fetched" })
+        const cachedData = await redisClient.get(cacheKey);
+
+        if (cachedData) {
+            console.log("🚀 Serving from REDIS CACHE (Super fast!)");
+            return res.status(200).json({statusCode: 200, products: JSON.parse(cachedData), message: "All products fetched" })
+        }
+
+        console.log("Cache Miss! Fetching from MongoDB...");
+        const products = await Product.find({});
+
+        // 'EX', 3600 means this cache expires and refreshes automatically every 1 hour
+        await redisClient.setEx(cacheKey, 3600, JSON.stringify(products));
+
+        return res.status(200).json({statusCode: 200, products, message: "All products fetched" })
 
     } catch (error) {
         res.status(500).json({ message: error.message })
@@ -36,27 +49,27 @@ const addProduct = async (req, res) => {
 
 const updateProduct = async (req, res) => {
     try {
-        const {id} = req.params;
+        const { id } = req.params;
 
         const product = await Product.findById(id)
 
-        if(!product) {
+        if (!product) {
             return res.status(404).json({ message: "product does not exist" });
         }
 
         const updateData = {}
 
-        if(req.body.name) updateData.name = req.body.name;
-        if(req.body.description) updateData.description = req.body.description;
-        if(req.body.price) updateData.price = req.body.price;
-        if(req.body.image) updateData.image = req.body.image;
-        if(req.body.quantity) updateData.quantity = req.body.quantity;
-        if(req.body.category) updateData.category = req.body.category;
+        if (req.body.name) updateData.name = req.body.name;
+        if (req.body.description) updateData.description = req.body.description;
+        if (req.body.price) updateData.price = req.body.price;
+        if (req.body.image) updateData.image = req.body.image;
+        if (req.body.quantity) updateData.quantity = req.body.quantity;
+        if (req.body.category) updateData.category = req.body.category;
 
-        const updateProduct = await Product.findByIdAndUpdate(id,updateData, {new: true, runValidators: true})
+        const updateProduct = await Product.findByIdAndUpdate(id, updateData, { new: true, runValidators: true })
 
-        return res.status(200).json({product:updateProduct, message: "Product Updated Successfully" })
-        
+        return res.status(200).json({ product: updateProduct, message: "Product Updated Successfully" })
+
     } catch (error) {
         return res.status(500).json({ message: error.message })
     }
