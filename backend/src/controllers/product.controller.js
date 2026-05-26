@@ -2,6 +2,14 @@ import { Product } from "../models/product.model.js"
 import { ApiResponse } from "../utilities/ApiResponse.js"
 import redisClient from "../config/redis.js";
 
+const removeRedisCache = async (cacheKey) => {
+    try {
+        await redisClient.del(cacheKey);
+    } catch (error) {
+        console.error(`Failed to delete Redis cache for key ${cacheKey}:`, error);
+    }
+}
+
 const allProducts = async (req, res) => {
     try {
         const cacheKey = 'products:all';
@@ -10,7 +18,7 @@ const allProducts = async (req, res) => {
 
         if (cachedData) {
             console.log("🚀 Serving from REDIS CACHE (Super fast!)");
-            return res.status(200).json({statusCode: 200, products: JSON.parse(cachedData), message: "All products fetched" })
+            return res.status(200).json({ statusCode: 200, products: JSON.parse(cachedData), message: "All products fetched" })
         }
 
         console.log("Cache Miss! Fetching from MongoDB...");
@@ -19,7 +27,7 @@ const allProducts = async (req, res) => {
         // 'EX', 3600 means this cache expires and refreshes automatically every 1 hour
         await redisClient.setEx(cacheKey, 3600, JSON.stringify(products));
 
-        return res.status(200).json({statusCode: 200, products, message: "All products fetched" })
+        return res.status(200).json({ statusCode: 200, products, message: "All products fetched" })
 
     } catch (error) {
         res.status(500).json({ message: error.message })
@@ -41,6 +49,8 @@ const addProduct = async (req, res) => {
         const product = await Product.create(
             { name, description, price, image, quantity, category }
         )
+
+        await removeRedisCache('products:all');
 
         return res.status(200).json(new ApiResponse(200, product, "product added succefully"))
     } catch (error) {
@@ -69,6 +79,8 @@ const updateProduct = async (req, res) => {
 
         const updateProduct = await Product.findByIdAndUpdate(id, updateData, { new: true, runValidators: true })
 
+        await removeRedisCache('products:all');
+
         return res.status(200).json({ product: updateProduct, message: "Product Updated Successfully" })
 
     } catch (error) {
@@ -88,6 +100,8 @@ const deleteProduct = async (req, res) => {
         }
 
         const deleteProduct = await Product.findByIdAndDelete(id)
+
+        await removeRedisCache('products:all');
 
         return res.status(200).json({ deleteProduct, message: "productd deleted successfully" })
 
