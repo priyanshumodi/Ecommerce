@@ -12,7 +12,7 @@ const ProductList = () => {
 
     useEffect(() => {
         dispatch(fetchAllProducts())
-    }, [])
+    }, [dispatch])
 
     if (isLoading) return <div className="home-title">Loading Data....</div>;
     return (
