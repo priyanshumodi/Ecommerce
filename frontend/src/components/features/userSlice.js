@@ -133,6 +133,9 @@ export const userSlice = createSlice({
             .addCase(logoutUser.rejected, (state, action) => {
                 state.isLoading = false;
                 state.error = action.payload;
+
+                localStorage.removeItem('accessToken')
+                localStorage.removeItem('user')
             })
             .addCase(fetchAllUsers.pending, (state) => {
                 state.isLoading = true;
