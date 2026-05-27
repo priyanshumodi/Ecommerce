@@ -12,10 +12,12 @@ import { verifyJWT } from './middlewares/auth.middleware.js';
 
 const app = express();
 
+const allowedOrigins = ['http://localhost:5173', process.env.CORS_ORIGIN].filter(Boolean);
+
 const corsOptions = {
     // 1. Specify the exact origin of your React app
     // origin: 'http://localhost:5173', 
-    origin: process.env.CORS_ORIGIN, 
+    origin: allowedOrigins, 
     
     // 2. Allow cookies to be passed
     credentials: true,
